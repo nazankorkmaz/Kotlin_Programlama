@@ -1,7 +1,8 @@
 package com.example.kotlinuygulamadili
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import java.util.Scanner
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -234,9 +235,63 @@ class MainActivity : AppCompatActivity() {
         val benimMap = hashMapOf("IlkListe" to benimDigerListem, "IkinciListe" to benimListemm)
         println(benimMap.get("IlkListe")?.get(2))
 
+        val scanner = Scanner(System.`in`)
+        println("isim ve sayı giriniz :")
+        //val name = scanner.next()
+        //val number = scanner.nextInt()
+        //nameRecycle(name,number)
+
+        // İstenildiği kadar verş yollamak
+        val t1 = toplam(1,2,3,4,5,6)
+        println("t1 : $t1")
+
+        // Extension fonksiyonlar kotlindeki sınıfları genisletmek icin kullanılan yontemdir
+        // Int sınıfı ornegı:
+        val sonucExtension = 5.carpi(2)
+        println(sonucExtension)
+
+        // sınıf onune konulan data kelimesi constr, getteri,sette,hahscode, equals gibi
+        //yapıları otomatik olusturur. mesela sanatcınınki gibi ama daha detaylı kendisi yapıyor
+
+        ucretBoyutEnam(BoyutEnam.Buyuk)
+
+        val adres = Adres("İstanbul","Beylikdüzü")
+        val kisi = Kisiler("Nazan",22,adres)
+        println("Kisi il : ${kisi.adres.il}")
     }
 
     fun fonksiyonDeneme(a: Int,b:Int): Int{
         return(a+b)
     }
+
+    // konsoldan girilen ismi tekrarı kadar yazdırmak
+    fun nameRecycle(name : String, number :Int){
+
+        for (num in 1..number ){
+            println(name)
+        }
+    }
+
+    // dizi gibi calisir tek tek atar iceriye
+    fun toplam (vararg sayilar : Int): Int{
+        var sonuc = 0
+        for (s in sayilar){
+            sonuc += s
+        }
+        return sonuc
+    }
+
+    fun Int.carpi(sayi : Int):Int{
+        return this * sayi
+    }
+
+    fun ucretBoyutEnam(boyut:BoyutEnam){
+        when(boyut){
+            BoyutEnam.Buyuk -> println(40*30)
+            BoyutEnam.Kucuk -> println(20*30)
+            BoyutEnam.Orta -> println(30*30)
+        }
+    }
+
+
 }
