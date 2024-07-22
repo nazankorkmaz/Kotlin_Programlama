@@ -255,9 +255,44 @@ class MainActivity : AppCompatActivity() {
 
         ucretBoyutEnam(BoyutEnam.Buyuk)
 
+        // Composition : nesne icinde nesneyi cagırma
+        // Vertabanlarındaki foreignkey mantıgı
+
         val adres = Adres("İstanbul","Beylikdüzü")
         val kisi = Kisiler("Nazan",22,adres)
         println("Kisi il : ${kisi.adres.il}")
+
+
+        val k1 = Kategoriler(1,"Dram")
+        val k2 = Kategoriler(2,"Komedi")
+
+        val y1 = Yonetmenler(1,"Nuri B. Ceylan")
+        val y2 = Yonetmenler(2,"Tarantino")
+
+        val f1 = Filmler(1,"Django",2013,k1,y2)
+        println("Film id :${f1.film_id}")
+        println("Film kategori :${f1.kategori.kategori_ad}")
+        println("Film yonetmen :${f1.yonetmen.yonetmen_ad}")
+
+        // Thread: Multitasking - cok işlemcilik
+        // tek bir program akısı icerisinde birden fazla islemin gerceklestirilmesi
+        // İki yolla yapılabilir: thread sınıfını kalıtımla alma
+                                // runnable interfacden uretme
+        /*
+        mesela thread.sleep static bir methodtur, her yerde cagırılabilir
+        yalnızca icinde bulunudgu threadı etkiler
+        */
+
+        val birinciThread = BirinciThread()
+        birinciThread.start()
+        val ikinciThread = Thread(IkinciThread()) // interfacede boyle tanımlanır
+        ikinciThread.start()
+
+        for ( i in 900..999){
+            println("Main Thread $i")
+            Thread.sleep(100)
+        }
+
     }
 
     fun fonksiyonDeneme(a: Int,b:Int): Int{
